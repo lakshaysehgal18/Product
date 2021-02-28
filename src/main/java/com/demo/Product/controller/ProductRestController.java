@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 import com.demo.Product.entity.Product;
 import com.demo.Product.model.ErrorMessage;
 import com.demo.Product.service.ProductService;
@@ -50,6 +52,25 @@ public class ProductRestController {
 	return  new ResponseEntity<ErrorMessage>(new ErrorMessage("Resource not found"),HttpStatus.NOT_FOUND);
 		
 		
+	}
+
+	@GetMapping("getAllRedProducts")
+	public ResponseEntity<?> getAllRedProducts(){
+
+		List<Product> lis=productservice.getAllRedProducts();
+
+		if(lis.size()!=0){
+			return new ResponseEntity<List<Product>>(lis,HttpStatus.OK);
+
+		}
+
+		else{
+			return new ResponseEntity<ErrorMessage>(new ErrorMessage("No Red Color Product Present"),HttpStatus.NOT_FOUND);
+		}
+
+
+	
+
 	}
 	
 		
